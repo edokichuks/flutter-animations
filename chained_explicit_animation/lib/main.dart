@@ -91,24 +91,24 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   void initState() {
     _ccwAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
     _ccwAnimation = Tween<double>(
       begin: 0,
       end: -(pi / 2),
     ).animate(CurvedAnimation(
-        parent: _ccwAnimationController, curve: Curves.bounceOut));
+        parent: _ccwAnimationController, curve: Curves.bounceInOut));
 
     ///?flip
     _flipController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
     _flipAnimation = Tween<double>(
       begin: 0,
       end: pi,
     ).animate(
-        CurvedAnimation(parent: _flipController, curve: Curves.bounceOut));
+        CurvedAnimation(parent: _flipController, curve: Curves.bounceInOut));
 //status Listener
     _ccwAnimationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           begin: _flipAnimation.value,
           end: _flipAnimation.value + pi,
         ).animate(
-            CurvedAnimation(parent: _flipController, curve: Curves.bounceOut));
+            CurvedAnimation(parent: _flipController, curve: Curves.bounceInOut));
         _flipController
           ..reset()
           ..forward();
@@ -150,14 +150,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     debugPrint('rebuilt');
     // Future.delayed(
-    //   const Duration(seconds: 1),
+    //   const Duration(seconds: 2),
     //   () => _ccwAnimationController
     //     ..reset()
     //     ..forward(),
     // );
     _ccwAnimationController
       ..reset()
-      ..forward.delayed(const Duration(seconds: 1));
+      ..forward.delayed(const Duration(seconds: 2));
     return Scaffold(
       body: Center(
           child: AnimatedBuilder(
